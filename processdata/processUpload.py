@@ -100,7 +100,7 @@ def processSyncData(filePath, cid, uuid):
             exists = mysqlHelper.checkSleepLogExists(cid, oneItem['trackDate'])
             oneRecord = SleepLog(datetime.strptime(oneItem['createTime'], '%m/%d/%Y %H:%M:%S'), \
                             oneItem['trackDate'], datetime.strptime(oneItem['sleepTime'], '%m/%d/%Y %H:%M:%S'), \
-                            datetime.strptime(oneItem['wakeupTime'], '%m/%d/%Y %H:%M:%S'), 0, 1)
+                            datetime.strptime(oneItem['wakeupTime'], '%m/%d/%Y %H:%M:%S'), oneItem['napTime'], 0, 1)
             if exists:
                 mysqlHelper.updateSleepLogData(oneRecord, cid)
             else:

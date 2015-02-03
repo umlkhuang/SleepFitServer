@@ -41,11 +41,12 @@ class SleepLog(object):
     Stores all information of an entry of sleep log data.
     """
     
-    def __init__(self, createTime, trackDate, sleepTime, wakeupTime, quality, finished):
+    def __init__(self, createTime, trackDate, sleepTime, wakeupTime, napTime, quality, finished):
         self.createTime = createTime
         self.trackDate = trackDate
         self.sleepTime = sleepTime
         self.wakeupTime = wakeupTime
+        self.napTime = napTime
         self.quality = quality
         self.finished = finished
         
@@ -53,7 +54,7 @@ class SleepLog(object):
         createStr = self.createTime.strftime("%Y-%m-%d %H:%M:%S")
         sleepStr = self.sleepTime.strftime("%Y-%m-%d %H:%M:%S")
         wakeupStr = self.wakeupTime.strftime("%Y-%m-%d %H:%M:%S")
-        return "%s | %s | %s | %s | %d | %d" % (createStr, self.trackDate, sleepStr, wakeupStr, self.quality, self.finished)
+        return "%s | %s | %s | %s | %d | | %d | %d" % (createStr, self.trackDate, sleepStr, wakeupStr, self.napTime, self.quality, self.finished)
 
 
 class SysEvent(object):

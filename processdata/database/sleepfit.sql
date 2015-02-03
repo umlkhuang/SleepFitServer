@@ -46,6 +46,7 @@ CREATE TABLE `sleeplogger` (
     `trackDate` char(40) default '',
     `sleepTime` timestamp default 0,
     `wakeupTime` timestamp default 0,
+    `napTime` SMALLINT UNSIGNED default 0,
     `quality` tinyint unsigned default 3,
     `finished` tinyint unsigned default 0,
     PRIMARY KEY (`ID`, `CID`)

@@ -52,9 +52,9 @@ class MysqlHelper(object):
     def insertSleepData(self, sleepData, cid):
         success = False
         
-        sql = "INSERT INTO sleeplogger (CID, createTime, trackDate, sleepTime, wakeupTime, quality, finished) \
+        sql = "INSERT INTO sleeplogger (CID, createTime, trackDate, sleepTime, wakeupTime, napTime, quality, finished) \
                 VALUES ('%s', '%s', '%s', '%s', '%s', '%d', '%d')" % \
-                (cid, sleepData.createTime, sleepData.trackDate, sleepData.sleepTime, sleepData.wakeupTime, sleepData.quality, sleepData.finished)
+                (cid, sleepData.createTime, sleepData.trackDate, sleepData.sleepTime, sleepData.wakeupTime, sleepData.napTime, sleepData.quality, sleepData.finished)
         try:
             cursor = self.db.cursor()
             cursor.execute(sql)
@@ -111,8 +111,8 @@ class MysqlHelper(object):
     def updateSleepLogData(self, sleepData, cid):
         success = False
 
-        sql = "UPDATE sleeplogger SET sleepTime = '%s', wakeupTime = '%s', finished = '%d'\
-                WHERE CID = '%s' AND trackDate = '%s'" % (sleepData.sleepTime, sleepData.wakeupTime, sleepData.finished, \
+        sql = "UPDATE sleeplogger SET sleepTime = '%s', wakeupTime = '%s', napTime = '%d', finished = '%d'\
+                WHERE CID = '%s' AND trackDate = '%s'" % (sleepData.sleepTime, sleepData.wakeupTime, sleepData.napTime, sleepData.finished, \
                 cid, sleepData.trackDate)
         try:
             cursor = self.db.cursor()

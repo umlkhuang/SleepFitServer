@@ -77,7 +77,7 @@ class DatabaseHelper():
         """
         data = []
         sqlstr = "SELECT createTime as \"[timestamp]\", trackDate, sleepTime as \"[timestamp]\", \
-                    wakeupTime as \"[timestamp]\", quality, finished FROM sleeplogger \
+                    wakeupTime as \"[timestamp]\", napTime, quality, finished FROM sleeplogger \
                     order by date(sleepTime) ASC "
         
         try:
@@ -90,9 +90,10 @@ class DatabaseHelper():
                 trackDate = row[1]
                 sleepTime = row[2]
                 wakeupTime = row[3]
-                quality = int(row[4])
-                finished = int(row[5])
-                oneRecord = SleepLog(createTime, trackDate, sleepTime, wakeupTime, quality, finished)
+                napTime = int(row[4])
+                quality = int(row[5])
+                finished = int(row[6])
+                oneRecord = SleepLog(createTime, trackDate, sleepTime, wakeupTime, napTime, quality, finished)
                 data.append(oneRecord)
             return data 
         except sqlite3.Error, e:
