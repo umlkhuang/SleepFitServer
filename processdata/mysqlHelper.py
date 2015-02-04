@@ -53,7 +53,7 @@ class MysqlHelper(object):
         success = False
         
         sql = "INSERT INTO sleeplogger (CID, createTime, trackDate, sleepTime, wakeupTime, napTime, quality, finished) \
-                VALUES ('%s', '%s', '%s', '%s', '%s', '%d', '%d')" % \
+                VALUES ('%s', '%s', '%s', '%s', '%s', '%d', '%d', '%d')" % \
                 (cid, sleepData.createTime, sleepData.trackDate, sleepData.sleepTime, sleepData.wakeupTime, sleepData.napTime, sleepData.quality, sleepData.finished)
         try:
             cursor = self.db.cursor()
