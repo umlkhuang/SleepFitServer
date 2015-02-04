@@ -168,7 +168,7 @@ class SleepEngine(object):
                 lastNightSleep['wakeupTime'] = oneSleepSeg['end']
                 lastNightSleep['duration'] = oneSleepSeg['duration']
 
-        sleepInstance = SleepLog(datetime.now(), trackDate, lastNightSleep['sleepTime'], lastNightSleep['wakeupTime'], 0, 0)
+        sleepInstance = SleepLog(datetime.now(), trackDate, lastNightSleep['sleepTime'], lastNightSleep['wakeupTime'], 0, 0, 0)
         if self.mysqlHelper.checkSleepLogExists(self.cid, trackDate):
             self.mysqlHelper.updateSleepLogData(sleepInstance, self.cid)
         else:

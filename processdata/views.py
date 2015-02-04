@@ -118,4 +118,18 @@ def get_sleep_info(request):
         return HttpResponse(status=400)
     retJSON = processSleepRequest.get_sleep_by_day(accessCode, trackDate)
     return HttpResponse(retJSON, content_type='application/json')
-    
+
+@csrf_exempt
+def upload_Jing_file(request):
+    fileName = request.POST.get('fileName')
+
+    if fileName == '':
+        return HttpResponse(status=400)
+
+    filePath = "/home/jing/rawFile/" + fileName
+    destination = open(filePath, 'wb+')
+    for chunk in request.FILES['file'].chunks():
+        destination.write(chunk)
+    destination.close()
+
+    return HttpResponse()
