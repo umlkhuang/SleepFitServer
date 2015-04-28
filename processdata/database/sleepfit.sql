@@ -196,6 +196,20 @@ CREATE TABLE `dailylog` (
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
+--
+-- Table structure for table `userevents`
+--
+
+DROP TABLE IF EXISTS `userevents`;
+CREATE TABLE `userevents` (
+    `ID` int unsigned NOT NULL AUTO_INCREMENT,
+    `CID` char(128) NOT NULL DEFAULT '',
+    `createTime` timestamp NOT NULL default 0,
+    `trackDate` char(40) default '',
+    `dataStyle` mediumtext default '',
+    `data` mediumtext default '',
+    PRIMARY KEY (`ID`, `CID`)
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 
 

@@ -5,7 +5,7 @@ from datetime import datetime
 from constants import MYSQL_HOST, MYSQL_USER, MYSQL_PASS, MYSQL_DB
 
 from instance import SensingData, SleepLog, SysEvent, MovementRawData,\
-    SoundRawData, LightRawData, ProximityRawData, RoomData, LifestyleRawData
+    SoundRawData, LightRawData, ProximityRawData, RoomData, LifestyleRawData, UserEvents
 from roomDetector import RoomDetector
     
 class MysqlHelper(object):
@@ -149,6 +149,29 @@ class MysqlHelper(object):
     def insertSysEventDataList(self, dataList, cid):
         for sysevent in dataList:
             self.insertSysEventData(sysevent, cid)
+
+    def insertUserEventData(self, userevent, cid):
+        success = False
+
+        sql = "INSERT INTO userevents (CID, createTime, trackDate, dataStyle, data) \
+                VALUES ('%s', '%s', '%s', '%s', '%s')" % \
+              (cid, userevent.createTime, userevent.trackDate, userevent.dataStyle, userevent.data)
+        try:
+            cursor = self.db.cursor()
+            cursor.execute(sql)
+            self.db.commit()
+            success = True
+        except MySQLdb.Error, e:
+            print "Insert into table userevents error: %s" % (e)
+            self.db.rollback()
+            success = False
+        finally:
+            cursor.close()
+            return success
+
+    def insertUserEventsDataList(self, dataList, cid):
+        for userevent in dataList:
+            self.insertUserEventData(userevent, cid)
     
     def insertMovementData(self, movementData, cid): 
         success = False
@@ -476,7 +499,7 @@ class MysqlHelper(object):
             for row in rows:
                 sleepTime = row[0]
                 wakeupTime = row[1]
-                oneRecord = SleepLog(0, trackDate, sleepTime, wakeupTime, 0, 0)
+                oneRecord = SleepLog(0, trackDate, sleepTime, wakeupTime, 0, 0, 0)
                 data.append(oneRecord)
         except MySQLdb.Error, e:
             print "Query table sleeplogger error: %s" % (e)

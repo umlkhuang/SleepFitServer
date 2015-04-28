@@ -168,6 +168,12 @@ def processSyncData(filePath, cid, uuid):
         for oneItem in eventData:
             oneRecord = SysEvent(datetime.strptime(oneItem['createTime'], '%m/%d/%Y %H:%M:%S'), oneItem['trackDate'], int(oneItem['eventType']))
             mysqlHelper.insertSysEventData(oneRecord, cid)
+
+    if "userEvents" in data:
+        events = data['userEvents']
+        for oneItem in events:
+            oneRecord = UserEvents(datetime.strptime(oneItem['createTime'], '%m/%d/%Y %H:%M:%S'), oneItem['trackDate'], oneItem['dataStyle'], oneItem['data'])
+            mysqlHelper.insertUserEventData(oneRecord, cid)
     
     # Calculate the sleep time and wakeup time, this need to be done in another thread
     engine = SleepEngine(cid, lastSensingdataTS)
@@ -187,6 +193,6 @@ if __name__ == "__main__":
     #unzipFile("/home/ke/Desktop/658ac828bdadbddaa909315ad80ac8.zip")
     #processUploadedFile("/home/ke/sleepfit/doneFile/6e44881f5af5d54a452b99f57899a7_201412032117.zip", "6e44881f5af5d54a452b99f57899a7", "6e44881f5af5d54a452b99f57899a7")
     #processSyncData("{\"soundRaw\":[{\"data\":\"43|40|50|67|50|39|38|69|65|42\",\"id\":\"1\",\"createTime\":\"12\/22\/2014 10:54:30\"}]}", "6e44881f5af5d54a452b99f57899a7", "6e44881f5af5d54a452b99f57899a7") 
-    processSyncData("/home/ke/sleepfit/rawFile/6e44881f5af5d54a452b99f57899a7_201501041301.txt", "6e44881f5af5d54a452b99f57899a7", "6e44881f5af5d54a452b99f57899a7")
+    processSyncData("/home/ke/sleepfit/rawFile/6e44881f5af5d54a452b99f57899a7_201504281345.txt", "6e44881f5af5d54a452b99f57899a7", "6e44881f5af5d54a452b99f57899a7")
     #processUnhandledFiles("6e44881f5af5d54a452b99f57899a7", "6e44881f5af5d54a452b99f57899a7")
     

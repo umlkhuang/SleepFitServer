@@ -141,7 +141,20 @@ class LifestyleRawData(object):
         createStr = self.createTime.strftime("%Y-%m-%d %H:%M:%S")
         logTimeStr = self.logTime.strftime("%Y-%m-%d %H:%M:%S")
         return "%s | %s | %s | %d | %s | %d | %s" % (createStr, self.trackDate, self.typeName, self.typeId, logTimeStr, self.selection, self.note)
-        
+
+class UserEvents(object):
+    """
+    Stores all information of an entry of user event data.
+    """
+    def __init__(self, createTime, trackDate, dataStyle, data):
+        self.createTime = createTime
+        self.trackDate = trackDate
+        self.dataStyle = dataStyle
+        self.data = data
+
+    def __repr__(self):
+        createStr = self.createTime.strftime("%Y-%m-%d %H:%M:%S")
+        return "%s | %s | %s | %s" % (createStr, self.trackDate, self.dataStyle, self.data)
 
 class CombinedData(object):
     """
